@@ -2,7 +2,7 @@ name: Deploy Review Site
 
 on:
   push:
-    branches: ["main"] # Change to "master" if your default branch is master
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -26,8 +26,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-level: 20
-          cache: 'npm'
+          node-version: 20 # 🟢 Fixed typo here
           
       - name: Install dependencies
         run: npm install
