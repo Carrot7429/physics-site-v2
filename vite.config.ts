@@ -16,21 +16,22 @@ function figmaAssetResolver() {
   }
 }
 
+import { defineConfig } from 'vite'
+import react from '@vitejs/react-refresh' // Or whatever react import your file currently uses at the very top
+import tailwindcss from '@tailwindcss/vite' 
+import path from 'path'
+
 export default defineConfig({
+  base: '/physics-site-v2/', // 👈 Added this line so your sub-pages and assets map correctly to GitHub Pages
   plugins: [
     figmaAssetResolver(),
-    // The React and Tailwind plugins are both required for Make, even if
-    // Tailwind is not being actively used – do not remove them
     react(),
     tailwindcss(),
   ],
   resolve: {
     alias: {
-      // Alias @ to the src directory
       '@': path.resolve(__dirname, './src'),
     },
   },
-
-  // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
 })
