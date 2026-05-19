@@ -7,35 +7,51 @@ import { WindupToy } from './components/WindupToy';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white text-black">
-      <header className="border-b border-black bg-white p-5">
-        <div className="max-w-screen-xl mx-auto">
-          <h1>Energy Lab</h1>
-          <p className="text-sm">Interactive Physics Simulations</p>
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <header className="border-b border-slate-800 bg-slate-900/95 py-6 shadow-[0_10px_40px_rgba(15,23,42,0.55)]">
+        <div className="max-w-screen-xl mx-auto px-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.35em] text-cyan-300/80">
+                Physics Instrumentation
+              </p>
+              <h1 className="text-4xl font-semibold text-slate-100">Energy Lab</h1>
+            </div>
+            <p className="max-w-xl text-sm leading-7 text-slate-400">
+              Interactive physics simulations for academic and engineering study, delivered in a premium laboratory dashboard interface.
+            </p>
+          </div>
         </div>
       </header>
 
-      <main className="max-w-screen-xl mx-auto p-5">
-        <section className="mb-8">
-          <h2 className="mb-4">Welcome to Energy Lab</h2>
-          <p className="mb-6">
-            Explore the fundamental principles of energy through interactive simulations and calculations.
-            Understanding energy is key to understanding how our universe works.
-          </p>
+      <main className="max-w-screen-xl mx-auto px-5 py-8 space-y-8">
+        <section className="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.45)]">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="space-y-4">
+              <h2 className="text-3xl font-semibold text-slate-100">Welcome to the Energy Lab</h2>
+              <p className="max-w-3xl text-sm leading-7 text-slate-400">
+                Explore the fundamental principles of energy through interactive simulations and advanced calculation stations. These modules combine core physics concepts with real-time instrumentation and visual diagnostics.
+              </p>
+            </div>
+            <div className="rounded-3xl border border-slate-800 bg-slate-950/80 px-5 py-4 text-sm text-slate-300 shadow-inner">
+              <span className="font-mono text-cyan-300">E_total = constant</span>
+            </div>
+          </div>
         </section>
 
-        <section className="mb-8 bg-gray-100 border border-black p-5">
-          <h3 className="mb-2">What is Energy?</h3>
-          <p>
-            In science, energy is defined as the capacity to do work. It exists in many forms, including kinetic (motion), potential (stored), thermal (heat), and elastic energy. A core concept in physics is the law of conservation of energy, which states that energy cannot be created or destroyed; it can only be transformed from one form to another.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="mb-4">Core Concepts</h2>
-          <div className="space-y-6">
+        <section className="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.45)] space-y-8">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.35em] text-cyan-300/80">Core Concepts</p>
+              <h2 className="text-2xl font-semibold text-slate-100">Laboratory Modules</h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-6 text-slate-400">
+              Use the calculators and challenges below to inspect energy, work, power, potential, kinetic, and elastic systems in a refined dashboard.
+            </p>
+          </div>
+          <div className="space-y-8">
             <WorkPowerCalculator />
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-6 xl:grid-cols-2">
               <GPECalculator />
               <KineticCalculator />
             </div>
@@ -43,18 +59,38 @@ export default function App() {
           </div>
         </section>
 
-        <section className="mb-8">
-          <h2 className="mb-4">Interactive Challenge</h2>
-          <ConservationChallenge />
+        <section className="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.45)]">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.35em] text-cyan-300/80">Interactive Challenge</p>
+              <h2 className="text-2xl font-semibold text-slate-100">Conservation Challenge</h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-6 text-slate-400">
+              Drag energy bars and verify conservation of energy with an intuitive experimental workspace.
+            </p>
+          </div>
+          <div className="mt-6">
+            <ConservationChallenge />
+          </div>
         </section>
 
-        <section className="mb-8">
-          <h2 className="mb-4">Physics Simulation</h2>
-          <WindupToy />
+        <section className="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.45)]">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.35em] text-cyan-300/80">Dynamic Simulation</p>
+              <h2 className="text-2xl font-semibold text-slate-100">Wind-up Toy</h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-6 text-slate-400">
+              Observe energy transfer in motion and thermal dissipation with a laboratory-grade animated model.
+            </p>
+          </div>
+          <div className="mt-6">
+            <WindupToy />
+          </div>
         </section>
 
-        <footer className="mt-12 pt-8 border-t border-black text-center">
-          <p>Energy Lab - Interactive Physics Education</p>
+        <footer className="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 text-center text-sm text-slate-400 shadow-[0_20px_40px_rgba(15,23,42,0.35)]">
+          <p>Energy Lab — premium physics education interface designed for classroom and engineering review.</p>
         </footer>
       </main>
     </div>

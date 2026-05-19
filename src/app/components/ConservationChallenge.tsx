@@ -38,7 +38,7 @@ const DraggableBar = ({
   return (
     <div
       ref={drag}
-      className={`p-3 border border-black cursor-move transition-all ${
+      className={`rounded-[1.5rem] border border-slate-800 px-3 py-3 cursor-move transition-all ${
         isDragging ? 'opacity-50' : 'opacity-100'
       }`}
       style={{
@@ -47,7 +47,7 @@ const DraggableBar = ({
         minHeight: '40px',
       }}
     >
-      <div className="text-xs text-white">
+      <div className="text-xs font-semibold text-white">
         {bar.type === 'elastic' && 'E_elastic'}
         {bar.type === 'kinetic' && 'KE'}
         {bar.type === 'potential' && 'PE'}
@@ -83,11 +83,11 @@ const DropZone = ({
   return (
     <div
       ref={drop}
-      className={`border-2 border-dashed p-6 min-h-[240px] transition-all ${
-        isOver ? 'border-blue-600 bg-blue-50' : 'border-gray-400 bg-gray-50'
+      className={`rounded-[1.5rem] border-2 border-dashed p-6 min-h-[240px] transition-all ${
+        isOver ? 'border-cyan-500/80 bg-slate-950/70' : 'border-slate-700 bg-slate-950/60'
       }`}
     >
-      <div className="text-sm mb-6 pb-2 border-b border-gray-300">
+      <div className="text-sm mb-6 pb-2 border-b border-slate-800 text-slate-300">
         {position === 'before' ? 'Before (Initial Energy)' : 'After (Final Energy)'}
       </div>
       <div className="flex gap-3 items-end min-h-[160px] flex-wrap">
@@ -95,7 +95,7 @@ const DropZone = ({
           <DraggableBar key={bar.id} bar={bar} position={position} onRemove={onRemove} />
         ))}
         {bars.length === 0 && (
-          <div className="text-xs text-gray-400 flex items-center justify-center w-full h-full">
+          <div className="text-xs text-slate-500 flex items-center justify-center w-full h-full">
             Drop energy bars here
           </div>
         )}
@@ -128,15 +128,15 @@ const BankBar = ({
   return (
     <div
       ref={drag}
-      className={`px-4 py-2 border-2 border-black cursor-grab transition-all ${
-        isDragging ? 'opacity-30' : 'opacity-100'
+      className={`rounded-3xl px-4 py-2 border-2 cursor-grab transition-all ${
+        isDragging ? 'opacity-40' : 'opacity-100'
       }`}
       style={{
         backgroundColor: `${bar.color}20`,
         borderColor: bar.color,
       }}
     >
-      <div className="text-xs" style={{ color: bar.color }}>
+      <div className="text-xs font-semibold" style={{ color: bar.color }}>
         {bar.type === 'elastic' && 'E_elastic'}
         {bar.type === 'kinetic' && 'KE'}
         {bar.type === 'potential' && 'PE'}
@@ -236,12 +236,21 @@ export function ConservationChallenge() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="bg-gray-100 border border-black p-5">
-        <h3 className="mb-4">Conservation Challenge</h3>
-        <p className="text-sm mb-6">
-          Drag energy bars from the pool below to demonstrate that total mechanical energy never changes.
-          <strong> Drag bars out to remove them.</strong> Match the before and after energy totals!
-        </p>
+      <div className="rounded-[2rem] border border-slate-800 bg-slate-950/95 p-6 shadow-[0_30px_80px_rgba(15,23,42,0.6)]">
+        <div className="grid gap-4 rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-6 mb-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/80">Energy Conservation Lab</p>
+              <h3 className="text-3xl font-semibold text-slate-100">Conservation Challenge</h3>
+            </div>
+            <div className="rounded-3xl border border-slate-800 bg-slate-950/80 px-4 py-3 text-sm text-slate-300">
+              Drag bars to balance before and after energy totals
+            </div>
+          </div>
+          <p className="text-sm leading-6 text-slate-400">
+            Drag energy bars from the pool below to demonstrate that total mechanical energy remains conserved. Remove a bar by dragging it out of a zone.
+          </p>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <DropZone
@@ -258,23 +267,27 @@ export function ConservationChallenge() {
           />
         </div>
 
-        <div className="bg-white border border-black p-4 mb-6">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-sm">Before Total: <strong>{beforeTotal} J</strong></span>
-            <span className="text-sm">After Total: <strong>{afterTotal} J</strong></span>
+        <div className="rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-5 mb-6 shadow-sm">
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center mb-3">
+            <div className="text-sm text-slate-400">
+              Before Total: <span className="font-semibold text-slate-100">{beforeTotal} J</span>
+            </div>
+            <div className="text-sm text-slate-400">
+              After Total: <span className="font-semibold text-slate-100">{afterTotal} J</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-3 text-sm">
             {isCorrect ? (
               <>
-                <CheckCircle2 className="w-5 h-5 text-green-500" />
-                <span className="text-sm text-green-500">
+                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                <span className="text-emerald-300">
                   Correct! Energy is conserved: {beforeTotal} J = {afterTotal} J
                 </span>
               </>
             ) : (
               <>
-                <XCircle className="w-5 h-5 text-gray-400" />
-                <span className="text-sm text-gray-400">
+                <XCircle className="w-5 h-5 text-slate-500" />
+                <span className="text-slate-400">
                   Keep trying! The totals must match.
                 </span>
               </>
@@ -282,17 +295,17 @@ export function ConservationChallenge() {
           </div>
         </div>
 
-        <div className="border-2 border-dashed border-gray-400 p-5 mb-4 bg-gray-50">
-          <div className="text-sm mb-4 flex items-center gap-2">
-            <div className="w-2 h-2 bg-blue-600" />
-            Energy Bank (Drag from here • Return bars here by dragging them out)
+        <div className="rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-5 mb-4 shadow-sm">
+          <div className="text-sm mb-4 flex items-center gap-2 text-slate-300">
+            <div className="w-2 h-2 rounded-full bg-cyan-500" />
+            Energy Bank (Drag bars from here; drag them out to return)
           </div>
           <div className="flex flex-wrap gap-3 min-h-[60px]">
             {bankBars.map((bar) => (
               <BankBar key={bar.id} bar={bar} onRemove={handleRemoveFromBank} />
             ))}
             {bankBars.length === 0 && (
-              <div className="text-xs text-gray-400 flex items-center justify-center w-full">
+              <div className="text-xs text-slate-500 flex items-center justify-center w-full">
                 All bars in use - drag bars here to return them
               </div>
             )}
@@ -301,7 +314,7 @@ export function ConservationChallenge() {
 
         <button
           onClick={reset}
-          className="px-4 py-2 bg-white hover:bg-gray-100 border border-black text-sm transition-colors"
+          className="inline-flex items-center justify-center rounded-full bg-cyan-500 px-5 py-3 text-sm font-semibold text-slate-950 shadow-[0_20px_40px_rgba(34,211,238,0.18)] transition hover:bg-cyan-400"
         >
           Reset Challenge
         </button>

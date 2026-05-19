@@ -36,109 +36,113 @@ export function GPECalculator() {
   };
 
   return (
-    <div className="bg-white border border-black p-5">
-      <h3 className="mb-4 text-black">Gravitational Potential Energy Lab</h3>
+    <div className="rounded-[2rem] border border-slate-800 bg-slate-950/95 p-6 shadow-[0_30px_80px_rgba(15,23,42,0.6)]">
+      <div className="flex flex-col gap-4 rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-6">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/80">Gravitational Potential Energy</p>
+            <h3 className="text-3xl font-semibold text-slate-100">Potential Energy Lab</h3>
+          </div>
+          <div className="rounded-3xl border border-slate-800 bg-slate-950/80 px-4 py-3 text-sm text-slate-300">
+            <span className="font-mono text-cyan-300">GPE = mgh</span>
+          </div>
+        </div>
+        <p className="text-sm leading-6 text-slate-400">
+          Adjust mass, height, and potential energy to solve gravitational potential energy problems in a premium dark lab environment.
+        </p>
+      </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-5">
-          <div className="flex gap-2 items-center mb-6">
-            <span className="text-sm text-black">Solve for:</span>
-            <ToggleGroup.Root
-              type="single"
-              value={solveFor}
-              onValueChange={(value) => value && setSolveFor(value as 'GPE' | 'm' | 'h')}
-              className="flex gap-1"
-            >
-              <ToggleGroup.Item
-                value="GPE"
-                className={`px-3 py-1 border border-black text-sm ${
-                  solveFor === 'GPE' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-black'
-                }`}
+      <div className="mt-6 grid gap-6 xl:grid-cols-[1.35fr_0.95fr]">
+        <div className="space-y-6">
+          <div className="rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-5 shadow-sm">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <span className="text-sm uppercase tracking-[0.3em] text-slate-500">Solve for</span>
+              <ToggleGroup.Root
+                type="single"
+                value={solveFor}
+                onValueChange={(value) => value && setSolveFor(value as 'GPE' | 'm' | 'h')}
+                className="flex gap-2"
               >
-                GPE
-              </ToggleGroup.Item>
-              <ToggleGroup.Item
-                value="m"
-                className={`px-3 py-1 border border-black text-sm ${
-                  solveFor === 'm' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-black'
-                }`}
-              >
-                m (Mass)
-              </ToggleGroup.Item>
-              <ToggleGroup.Item
-                value="h"
-                className={`px-3 py-1 border border-black text-sm ${
-                  solveFor === 'h' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-black'
-                }`}
-              >
-                h (Height)
-              </ToggleGroup.Item>
-            </ToggleGroup.Root>
+                {(['GPE', 'm', 'h'] as const).map((value) => (
+                  <ToggleGroup.Item
+                    key={value}
+                    value={value}
+                    className={`rounded-3xl px-4 py-2 text-sm font-semibold transition ${
+                      solveFor === value
+                        ? 'bg-cyan-500 text-slate-950 shadow-[0_0_20px_rgba(34,211,238,0.18)]'
+                        : 'bg-slate-950/70 text-slate-300 border border-slate-800'
+                    }`}
+                  >
+                    {value === 'GPE' ? 'GPE' : value === 'm' ? 'm (Mass)' : 'h (Height)'}
+                  </ToggleGroup.Item>
+                ))}
+              </ToggleGroup.Root>
+            </div>
           </div>
 
           {solveFor !== 'm' && (
-            <div>
-              <label className="text-sm text-black">Mass (kg): {mass}</label>
+            <div className="rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-5 shadow-sm">
+              <label className="text-sm text-slate-300">Mass (kg): <span className="font-semibold text-slate-100">{mass}</span></label>
               <Slider.Root
                 value={[mass]}
                 onValueChange={(values) => setMass(values[0])}
                 max={20}
                 step={0.5}
-                className="relative flex items-center w-full h-5 mt-2"
+                className="relative flex items-center w-full h-5 mt-3"
               >
-                <Slider.Track className="bg-gray-100 relative grow h-2 border border-black">
-                  <Slider.Range className="absolute bg-blue-600 h-full" />
+                <Slider.Track className="bg-slate-800 relative grow h-2 rounded-full">
+                  <Slider.Range className="absolute bg-cyan-500 h-full rounded-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-5 h-5 bg-blue-600 border border-black cursor-pointer" />
+                <Slider.Thumb className="block w-5 h-5 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.25)] cursor-pointer" />
               </Slider.Root>
             </div>
           )}
 
           {solveFor !== 'h' && (
-            <div>
-              <label className="text-sm text-black">Height (m): {height}</label>
+            <div className="rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-5 shadow-sm">
+              <label className="text-sm text-slate-300">Height (m): <span className="font-semibold text-slate-100">{height}</span></label>
               <Slider.Root
                 value={[height]}
                 onValueChange={(values) => setHeight(values[0])}
                 max={20}
                 step={0.5}
-                className="relative flex items-center w-full h-5 mt-2"
+                className="relative flex items-center w-full h-5 mt-3"
               >
-                <Slider.Track className="bg-gray-100 relative grow h-2 border border-black">
-                  <Slider.Range className="absolute bg-blue-600 h-full" />
+                <Slider.Track className="bg-slate-800 relative grow h-2 rounded-full">
+                  <Slider.Range className="absolute bg-cyan-500 h-full rounded-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-5 h-5 bg-blue-600 border border-black cursor-pointer" />
+                <Slider.Thumb className="block w-5 h-5 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.25)] cursor-pointer" />
               </Slider.Root>
             </div>
           )}
 
           {solveFor !== 'GPE' && (
-            <div>
-              <label className="text-sm text-black">GPE (J): {gpe}</label>
+            <div className="rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-5 shadow-sm">
+              <label className="text-sm text-slate-300">GPE (J): <span className="font-semibold text-slate-100">{gpe}</span></label>
               <Slider.Root
                 value={[Math.min(gpe, 2000)]}
                 onValueChange={(values) => setGpe(values[0])}
                 max={2000}
                 min={0}
                 step={5}
-                className="relative flex items-center w-full h-5 mt-2"
+                className="relative flex items-center w-full h-5 mt-3"
               >
-                <Slider.Track className="bg-gray-100 relative grow h-2 border border-black">
-                  <Slider.Range className="absolute bg-blue-600 h-full" />
+                <Slider.Track className="bg-slate-800 relative grow h-2 rounded-full">
+                  <Slider.Range className="absolute bg-cyan-500 h-full rounded-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-5 h-5 bg-blue-600 border border-black cursor-pointer" />
+                <Slider.Thumb className="block w-5 h-5 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(34,211,238,0.25)] cursor-pointer" />
               </Slider.Root>
             </div>
           )}
 
-          <div className="bg-gray-100 border border-black p-5">
-            <div className="text-sm text-black mb-1">
+          <div className="rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-5 shadow-sm">
+            <div className="text-sm text-slate-500 mb-2">
               Formula: {solveFor === 'GPE' && 'GPE = mgh'}
               {solveFor === 'm' && 'm = GPE / (gh)'}
               {solveFor === 'h' && 'h = GPE / (gm)'}
             </div>
-            <div className="text-xs text-black mb-2">(g = 10 m/s²)</div>
-            <div className="text-2xl text-black">
+            <div className="text-xs text-slate-500 mb-3">(g = 10 m/s²)</div>
+            <div className="text-3xl font-semibold text-slate-100">
               {solveFor === 'GPE' && `GPE = ${calculate().toFixed(2)} J`}
               {solveFor === 'm' && `m = ${calculate().toFixed(2)} kg`}
               {solveFor === 'h' && `h = ${calculate().toFixed(2)} m`}
@@ -146,65 +150,41 @@ export function GPECalculator() {
           </div>
         </div>
 
-        <div className="relative h-64 bg-gray-100 border border-black overflow-hidden">
-          <div className="absolute left-0 bottom-2 w-1 bg-black" style={{ height: '100%' }}>
-            {getCurrentHeight() <= 20 ? (
-              [0, 5, 10, 15, 20].map((h) => (
-                <div
-                  key={h}
-                  className="absolute right-0 w-3 h-px bg-black"
-                  style={{ bottom: `${(h / 20) * 100}%` }}
-                >
-                  <span className="absolute right-4 text-xs text-black -translate-y-1/2">
-                    {h}m
-                  </span>
-                </div>
-              ))
-            ) : (
-              Array.from({ length: 5 }, (_, i) => {
-                const h = (getCurrentHeight() / 4) * i;
-                return (
-                  <div
-                    key={i}
-                    className="absolute right-0 w-3 h-px bg-black"
-                    style={{ bottom: `${(i / 4) * 100}%` }}
-                  >
-                    <span className="absolute right-4 text-xs text-black -translate-y-1/2">
-                      {h.toFixed(0)}m
-                    </span>
-                  </div>
-                );
-              })
+        <div className="rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-5 shadow-sm">
+          <div className="mb-4 flex items-center justify-between gap-4 text-sm text-slate-400">
+            <span>Height visualization</span>
+            <span className="font-mono text-cyan-300">{getCurrentHeight().toFixed(1)} m</span>
+          </div>
+
+          <div className="relative h-64 overflow-hidden rounded-[1.5rem] border border-slate-800 bg-slate-950/80">
+            <div className="absolute left-5 top-5 text-xs uppercase tracking-[0.3em] text-slate-500">Ground</div>
+            <div className="absolute inset-x-5 bottom-5 h-2 rounded-full bg-slate-800" />
+            <div className="absolute inset-x-5 top-6 bottom-16 rounded-[1.5rem] bg-slate-900/80" />
+            <div className="absolute left-6 top-6 flex h-full w-1 flex-col justify-between text-[0.65rem] text-slate-500">
+              {[20, 15, 10, 5, 0].map((value) => (
+                <span key={value} className="relative -left-8">
+                  {value}m
+                </span>
+              ))}
+            </div>
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 flex h-20 w-16 items-center justify-center rounded-3xl bg-cyan-500 text-slate-950 shadow-[0_0_40px_rgba(34,211,238,0.25)]"
+              style={{
+                bottom: `${(getVisualHeight() * getScaleFactor() / 20) * 78 + 8}%`,
+              }}
+              animate={{
+                bottom: `${(getVisualHeight() * getScaleFactor() / 20) * 78 + 8}%`,
+              }}
+              transition={{ type: 'spring', stiffness: 100, damping: 16 }}
+            >
+              <span className="text-sm font-semibold">Mass</span>
+            </motion.div>
+            {getCurrentHeight() > 20 && (
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 rounded-full border border-slate-700 bg-slate-950/80 px-3 py-1 text-[0.7rem] text-slate-300">
+                Scale: {getCurrentHeight().toFixed(1)}m (max on screen)
+              </div>
             )}
           </div>
-          <motion.div
-            className="absolute left-0 right-0 bg-gray-100 transition-all border-t border-black"
-            style={{
-              height: '8px',
-              bottom: 0,
-            }}
-          />
-          <motion.div
-            className="absolute w-10 h-10 bg-blue-600 border border-black"
-            style={{
-              left: '50%',
-              bottom: `${(getVisualHeight() * getScaleFactor() / 20) * 92}%`,
-              transform: 'translateX(-50%)',
-            }}
-            animate={{
-              bottom: `${(getVisualHeight() * getScaleFactor() / 20) * 92}%`,
-            }}
-            transition={{ type: 'spring', stiffness: 100, damping: 15 }}
-          >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-xs text-white">{solveFor === 'm' ? calculate().toFixed(1) : mass}kg</span>
-            </div>
-          </motion.div>
-          {getCurrentHeight() > 20 && (
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 text-xs text-black bg-white px-2 py-1 border border-black">
-              Scale: {getCurrentHeight().toFixed(1)}m (max on screen)
-            </div>
-          )}
         </div>
       </div>
     </div>

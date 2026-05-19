@@ -34,22 +34,36 @@ export function WorkPowerCalculator() {
   };
 
   return (
-    <div className="bg-gray-100 border border-black p-5">
-      <h3 className="mb-4">Work and Power</h3>
+    <div className="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.45)]">
+      <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="space-y-2">
+          <h3 className="text-2xl font-semibold text-slate-100">Work & Power Station</h3>
+          <p className="max-w-2xl text-sm leading-6 text-slate-400">
+            Choose the equation, manipulate inputs, and inspect the calculated result in real time.
+          </p>
+        </div>
+        <div className="rounded-3xl border border-slate-800 bg-slate-950/80 px-4 py-3 text-sm text-slate-300 shadow-inner">
+          <span className="font-mono text-cyan-300">W = F × d • P = W / t</span>
+        </div>
+      </div>
 
-      <div className="flex gap-2 mb-6">
+      <div className="mb-6 flex flex-wrap gap-3">
         <button
           onClick={() => setMode('work-calc')}
-          className={`px-4 py-2 border border-black ${
-            mode === 'work-calc' ? 'bg-blue-600 text-white' : 'bg-white text-black'
+          className={`rounded-3xl border px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+            mode === 'work-calc'
+              ? 'border-cyan-500 bg-cyan-500/15 text-cyan-200 shadow-[0_10px_30px_rgba(6,182,212,0.15)]'
+              : 'border-slate-700 bg-slate-950 text-slate-300 hover:border-cyan-500 hover:text-cyan-200 hover:bg-slate-900'
           }`}
         >
           Work Calculator
         </button>
         <button
           onClick={() => setMode('power-calc')}
-          className={`px-4 py-2 border border-black ${
-            mode === 'power-calc' ? 'bg-gray-600 text-white' : 'bg-white text-black'
+          className={`rounded-3xl border px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+            mode === 'power-calc'
+              ? 'border-cyan-500 bg-cyan-500/15 text-cyan-200 shadow-[0_10px_30px_rgba(6,182,212,0.15)]'
+              : 'border-slate-700 bg-slate-950 text-slate-300 hover:border-cyan-500 hover:text-cyan-200 hover:bg-slate-900'
           }`}
         >
           Power Calculator
@@ -58,34 +72,40 @@ export function WorkPowerCalculator() {
 
       {mode === 'work-calc' && (
         <div className="space-y-5">
-          <div className="flex gap-2 items-center mb-6">
-            <span className="text-sm">Solve for:</span>
+          <div className="flex flex-wrap gap-2 items-center text-sm text-slate-400">
+            <span>Solve for:</span>
             <ToggleGroup.Root
               type="single"
               value={workSolveFor}
               onValueChange={(value) => value && setWorkSolveFor(value as 'W' | 'F' | 'd')}
-              className="flex gap-1"
+              className="flex flex-wrap gap-2"
             >
               <ToggleGroup.Item
                 value="W"
-                className={`px-3 py-1 border border-black text-sm ${
-                  workSolveFor === 'W' ? 'bg-blue-600 text-white' : 'bg-white'
+                className={`rounded-3xl px-3 py-2 text-sm transition-all duration-200 border ${
+                  workSolveFor === 'W'
+                    ? 'border-cyan-500 bg-cyan-500/15 text-cyan-200'
+                    : 'border-slate-700 bg-slate-950 text-slate-300 hover:border-cyan-500 hover:text-cyan-200'
                 }`}
               >
                 W (Work)
               </ToggleGroup.Item>
               <ToggleGroup.Item
                 value="F"
-                className={`px-3 py-1 border border-black text-sm ${
-                  workSolveFor === 'F' ? 'bg-blue-600 text-white' : 'bg-white'
+                className={`rounded-3xl px-3 py-2 text-sm transition-all duration-200 border ${
+                  workSolveFor === 'F'
+                    ? 'border-cyan-500 bg-cyan-500/15 text-cyan-200'
+                    : 'border-slate-700 bg-slate-950 text-slate-300 hover:border-cyan-500 hover:text-cyan-200'
                 }`}
               >
                 F (Force)
               </ToggleGroup.Item>
               <ToggleGroup.Item
                 value="d"
-                className={`px-3 py-1 border border-black text-sm ${
-                  workSolveFor === 'd' ? 'bg-blue-600 text-white' : 'bg-white'
+                className={`rounded-3xl px-3 py-2 text-sm transition-all duration-200 border ${
+                  workSolveFor === 'd'
+                    ? 'border-cyan-500 bg-cyan-500/15 text-cyan-200'
+                    : 'border-slate-700 bg-slate-950 text-slate-300 hover:border-cyan-500 hover:text-cyan-200'
                 }`}
               >
                 d (Distance)
@@ -94,66 +114,69 @@ export function WorkPowerCalculator() {
           </div>
 
           {workSolveFor !== 'F' && (
-            <div>
-              <label className="text-sm">Force (N): {force}</label>
+            <div className="rounded-3xl border border-slate-800 bg-slate-950 p-4 shadow-sm">
+              <div className="text-sm text-slate-300">Force (N)</div>
+              <div className="mt-2 font-mono text-xl text-cyan-300">{force}</div>
               <Slider.Root
                 value={[force]}
                 onValueChange={(values) => setForce(values[0])}
                 max={200}
                 step={1}
-                className="relative flex items-center w-full h-5 mt-2"
+                className="relative flex items-center w-full h-5 mt-4"
               >
-                <Slider.Track className="bg-gray-300 relative grow h-2">
-                  <Slider.Range className="absolute bg-blue-600 h-full" />
+                <Slider.Track className="bg-slate-800 relative grow h-2 rounded-full">
+                  <Slider.Range className="absolute bg-cyan-500 h-full rounded-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-5 h-5 bg-blue-600 border border-black cursor-pointer" />
+                <Slider.Thumb className="block h-5 w-5 rounded-full bg-cyan-300 border border-slate-700 shadow-[0_0_0_4px_rgba(6,182,212,0.12)]" />
               </Slider.Root>
             </div>
           )}
 
           {workSolveFor !== 'd' && (
-            <div>
-              <label className="text-sm">Distance (m): {distance}</label>
+            <div className="rounded-3xl border border-slate-800 bg-slate-950 p-4 shadow-sm">
+              <div className="text-sm text-slate-300">Distance (m)</div>
+              <div className="mt-2 font-mono text-xl text-cyan-300">{distance}</div>
               <Slider.Root
                 value={[distance]}
                 onValueChange={(values) => setDistance(values[0])}
                 max={50}
                 step={0.5}
-                className="relative flex items-center w-full h-5 mt-2"
+                className="relative flex items-center w-full h-5 mt-4"
               >
-                <Slider.Track className="bg-gray-300 relative grow h-2">
-                  <Slider.Range className="absolute bg-blue-600 h-full" />
+                <Slider.Track className="bg-slate-800 relative grow h-2 rounded-full">
+                  <Slider.Range className="absolute bg-cyan-500 h-full rounded-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-5 h-5 bg-blue-600 border border-black cursor-pointer" />
+                <Slider.Thumb className="block h-5 w-5 rounded-full bg-cyan-300 border border-slate-700 shadow-[0_0_0_4px_rgba(6,182,212,0.12)]" />
               </Slider.Root>
             </div>
           )}
 
           {workSolveFor !== 'W' && (
-            <div>
-              <label className="text-sm">Work (J): {work}</label>
+            <div className="rounded-3xl border border-slate-800 bg-slate-950 p-4 shadow-sm">
+              <div className="text-sm text-slate-300">Work (J)</div>
+              <div className="mt-2 font-mono text-xl text-cyan-300">{work}</div>
               <Slider.Root
                 value={[work]}
                 onValueChange={(values) => setWork(values[0])}
                 max={5000}
                 step={10}
-                className="relative flex items-center w-full h-5 mt-2"
+                className="relative flex items-center w-full h-5 mt-4"
               >
-                <Slider.Track className="bg-gray-300 relative grow h-2">
-                  <Slider.Range className="absolute bg-blue-600 h-full" />
+                <Slider.Track className="bg-slate-800 relative grow h-2 rounded-full">
+                  <Slider.Range className="absolute bg-cyan-500 h-full rounded-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-5 h-5 bg-blue-600 border border-black cursor-pointer" />
+                <Slider.Thumb className="block h-5 w-5 rounded-full bg-cyan-300 border border-slate-700 shadow-[0_0_0_4px_rgba(6,182,212,0.12)]" />
               </Slider.Root>
             </div>
           )}
 
-          <div className="bg-white border border-black p-4 mt-4">
-            <div className="text-sm mb-2">
+          <div className="rounded-3xl border border-slate-800 bg-slate-950 p-5 text-slate-300 shadow-sm">
+            <div className="text-sm">
               Formula: {workSolveFor === 'W' && 'W = F × d'}
               {workSolveFor === 'F' && 'F = W / d'}
               {workSolveFor === 'd' && 'd = W / F'}
             </div>
-            <div className="text-xl">
+            <div className="mt-4 font-mono text-2xl text-cyan-300">
               {workSolveFor === 'W' && `W = ${calculateWork().toFixed(2)} J`}
               {workSolveFor === 'F' && `F = ${calculateWork().toFixed(2)} N`}
               {workSolveFor === 'd' && `d = ${calculateWork().toFixed(2)} m`}
@@ -164,34 +187,40 @@ export function WorkPowerCalculator() {
 
       {mode === 'power-calc' && (
         <div className="space-y-5">
-          <div className="flex gap-2 items-center mb-6">
-            <span className="text-sm">Solve for:</span>
+          <div className="flex flex-wrap gap-2 items-center text-sm text-slate-400">
+            <span>Solve for:</span>
             <ToggleGroup.Root
               type="single"
               value={powerSolveFor}
               onValueChange={(value) => value && setPowerSolveFor(value as 'P' | 'W' | 't')}
-              className="flex gap-1"
+              className="flex flex-wrap gap-2"
             >
               <ToggleGroup.Item
                 value="P"
-                className={`px-3 py-1 border border-black text-sm ${
-                  powerSolveFor === 'P' ? 'bg-gray-600 text-white' : 'bg-white'
+                className={`rounded-3xl px-3 py-2 text-sm transition-all duration-200 border ${
+                  powerSolveFor === 'P'
+                    ? 'border-cyan-500 bg-cyan-500/15 text-cyan-200'
+                    : 'border-slate-700 bg-slate-950 text-slate-300 hover:border-cyan-500 hover:text-cyan-200'
                 }`}
               >
                 P (Power)
               </ToggleGroup.Item>
               <ToggleGroup.Item
                 value="W"
-                className={`px-3 py-1 border border-black text-sm ${
-                  powerSolveFor === 'W' ? 'bg-gray-600 text-white' : 'bg-white'
+                className={`rounded-3xl px-3 py-2 text-sm transition-all duration-200 border ${
+                  powerSolveFor === 'W'
+                    ? 'border-cyan-500 bg-cyan-500/15 text-cyan-200'
+                    : 'border-slate-700 bg-slate-950 text-slate-300 hover:border-cyan-500 hover:text-cyan-200'
                 }`}
               >
                 W (Work)
               </ToggleGroup.Item>
               <ToggleGroup.Item
                 value="t"
-                className={`px-3 py-1 border border-black text-sm ${
-                  powerSolveFor === 't' ? 'bg-gray-600 text-white' : 'bg-white'
+                className={`rounded-3xl px-3 py-2 text-sm transition-all duration-200 border ${
+                  powerSolveFor === 't'
+                    ? 'border-cyan-500 bg-cyan-500/15 text-cyan-200'
+                    : 'border-slate-700 bg-slate-950 text-slate-300 hover:border-cyan-500 hover:text-cyan-200'
                 }`}
               >
                 t (Time)
@@ -200,66 +229,69 @@ export function WorkPowerCalculator() {
           </div>
 
           {powerSolveFor !== 'W' && (
-            <div>
-              <label className="text-sm">Work (J): {work}</label>
+            <div className="rounded-3xl border border-slate-800 bg-slate-950 p-4 shadow-sm">
+              <div className="text-sm text-slate-300">Work (J)</div>
+              <div className="mt-2 font-mono text-xl text-cyan-300">{work}</div>
               <Slider.Root
                 value={[work]}
                 onValueChange={(values) => setWork(values[0])}
                 max={5000}
                 step={10}
-                className="relative flex items-center w-full h-5 mt-2"
+                className="relative flex items-center w-full h-5 mt-4"
               >
-                <Slider.Track className="bg-gray-300 relative grow h-2">
-                  <Slider.Range className="absolute bg-gray-600 h-full" />
+                <Slider.Track className="bg-slate-800 relative grow h-2 rounded-full">
+                  <Slider.Range className="absolute bg-cyan-500 h-full rounded-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-5 h-5 bg-gray-600 border border-black cursor-pointer" />
+                <Slider.Thumb className="block h-5 w-5 rounded-full bg-cyan-300 border border-slate-700 shadow-[0_0_0_4px_rgba(6,182,212,0.12)]" />
               </Slider.Root>
             </div>
           )}
 
           {powerSolveFor !== 't' && (
-            <div>
-              <label className="text-sm">Time (s): {time}</label>
+            <div className="rounded-3xl border border-slate-800 bg-slate-950 p-4 shadow-sm">
+              <div className="text-sm text-slate-300">Time (s)</div>
+              <div className="mt-2 font-mono text-xl text-cyan-300">{time}</div>
               <Slider.Root
                 value={[time]}
                 onValueChange={(values) => setTime(values[0])}
                 max={60}
                 step={0.5}
-                className="relative flex items-center w-full h-5 mt-2"
+                className="relative flex items-center w-full h-5 mt-4"
               >
-                <Slider.Track className="bg-gray-300 relative grow h-2">
-                  <Slider.Range className="absolute bg-gray-600 h-full" />
+                <Slider.Track className="bg-slate-800 relative grow h-2 rounded-full">
+                  <Slider.Range className="absolute bg-cyan-500 h-full rounded-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-5 h-5 bg-gray-600 border border-black cursor-pointer" />
+                <Slider.Thumb className="block h-5 w-5 rounded-full bg-cyan-300 border border-slate-700 shadow-[0_0_0_4px_rgba(6,182,212,0.12)]" />
               </Slider.Root>
             </div>
           )}
 
           {powerSolveFor !== 'P' && (
-            <div>
-              <label className="text-sm">Power (W): {power}</label>
+            <div className="rounded-3xl border border-slate-800 bg-slate-950 p-4 shadow-sm">
+              <div className="text-sm text-slate-300">Power (W)</div>
+              <div className="mt-2 font-mono text-xl text-cyan-300">{power}</div>
               <Slider.Root
                 value={[power]}
                 onValueChange={(values) => setPower(values[0])}
                 max={1000}
                 step={5}
-                className="relative flex items-center w-full h-5 mt-2"
+                className="relative flex items-center w-full h-5 mt-4"
               >
-                <Slider.Track className="bg-gray-300 relative grow h-2">
-                  <Slider.Range className="absolute bg-gray-600 h-full" />
+                <Slider.Track className="bg-slate-800 relative grow h-2 rounded-full">
+                  <Slider.Range className="absolute bg-cyan-500 h-full rounded-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-5 h-5 bg-gray-600 border border-black cursor-pointer" />
+                <Slider.Thumb className="block h-5 w-5 rounded-full bg-cyan-300 border border-slate-700 shadow-[0_0_0_4px_rgba(6,182,212,0.12)]" />
               </Slider.Root>
             </div>
           )}
 
-          <div className="bg-white border border-black p-4 mt-4">
-            <div className="text-sm mb-2">
+          <div className="rounded-3xl border border-slate-800 bg-slate-950 p-5 text-slate-300 shadow-sm">
+            <div className="text-sm">
               Formula: {powerSolveFor === 'P' && 'P = W / t'}
               {powerSolveFor === 'W' && 'W = P × t'}
               {powerSolveFor === 't' && 't = W / P'}
             </div>
-            <div className="text-xl">
+            <div className="mt-4 font-mono text-2xl text-cyan-300">
               {powerSolveFor === 'P' && `P = ${calculatePower().toFixed(2)} W`}
               {powerSolveFor === 'W' && `W = ${calculatePower().toFixed(2)} J`}
               {powerSolveFor === 't' && `t = ${calculatePower().toFixed(2)} s`}

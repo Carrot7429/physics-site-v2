@@ -88,132 +88,122 @@ export function WindupToy() {
   };
 
   return (
-    <div className="bg-gray-100 border border-black p-5">
-      <h3 className="mb-4">Wind-up Toy Animation</h3>
-      <p className="text-sm mb-4">
+    <div className="space-y-6 rounded-[2rem] border border-slate-800 bg-slate-950 p-6 shadow-[0_30px_80px_rgba(15,23,42,0.65)]">
+      <header className="grid gap-4 rounded-[1.75rem] border border-slate-800 bg-slate-900/95 p-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="space-y-2">
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/80">
+              Experimental Dynamics
+            </p>
+            <h3 className="text-3xl font-semibold text-slate-100">
+              Wind-up Toy Simulation
+            </h3>
+          </div>
+          <div className="rounded-3xl border border-slate-800 bg-slate-950/80 px-4 py-3 text-sm text-slate-300 shadow-inner">
+            <span className="font-mono text-cyan-300">
+              E_spring → KE → E_thermal
+            </span>
+          </div>
+        </div>
+        <p className="max-w-3xl text-sm leading-6 text-slate-400">
         Watch as spring energy (E_spring) transforms into kinetic energy (KE) and finally thermal energy (E_thermal) as the toy comes to a stop.
       </p>
+      </header>
 
-      <div ref={scope} className="relative h-48 bg-white border border-black overflow-hidden mb-4">
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-300" />
+      <div ref={scope} className="relative overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950/95 p-5 shadow-[inset_0_0_40px_rgba(15,23,42,0.45)]">
+        <div className="absolute inset-x-5 bottom-6 h-0.5 bg-slate-800" />
 
         <motion.div
           id="toy"
-          className="absolute bottom-4 left-8 w-20 h-20 bg-blue-600 border border-black flex items-center justify-center"
+          className="absolute bottom-6 left-6 flex h-24 w-24 items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 text-slate-100 shadow-[0_20px_50px_rgba(15,23,42,0.35)]"
         >
           <motion.div
             id="wind-key"
-            className="text-white relative"
+            className="relative flex h-16 w-16 items-center justify-center rounded-full bg-slate-900/95 text-cyan-300 shadow-[0_0_40px_rgba(34,211,238,0.15)]"
             animate={isWound && !isMoving ? { rotate: [0, 10, -10, 0] } : {}}
             transition={{ duration: 0.5, repeat: Infinity }}
           >
-            <RotateCw className="w-10 h-10" />
+            <RotateCw className="h-8 w-8" />
             <motion.div
-              className="absolute -top-1 -right-1 w-3 h-3 bg-blue-600 border border-black"
+              className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-cyan-400 shadow-[0_0_12px_rgba(34,211,238,0.45)]"
               animate={{ scale: [1, 1.3, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
             />
           </motion.div>
 
           <motion.div
-            className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex gap-1"
+            className="absolute -bottom-1 left-1/2 flex -translate-x-1/2 gap-1"
             animate={isMoving ? { rotate: [0, 360] } : {}}
             transition={{ duration: 0.2, repeat: Infinity, ease: 'linear' }}
           >
-            <div className="w-2 h-2 bg-gray-300 border border-black" />
-            <div className="w-2 h-2 bg-gray-300 border border-black" />
+            <div className="h-2 w-2 rounded-full bg-slate-300" />
+            <div className="h-2 w-2 rounded-full bg-slate-300" />
+            <div className="h-2 w-2 rounded-full bg-slate-300" />
           </motion.div>
         </motion.div>
 
-        <div className="absolute top-4 left-4 space-y-1">
-          <div className="text-xs">
-            <span className="text-blue-600">E_spring:</span> {springEnergy.toFixed(1)} J
+        <div className="absolute left-5 top-5 grid gap-3">
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/90 px-4 py-3 text-sm text-slate-300 shadow-sm">
+            <div className="text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">
+              Spring energy
+            </div>
+            <div className="mt-2 font-mono text-xl text-cyan-300">{springEnergy.toFixed(1)} J</div>
           </div>
-          <div className="text-xs">
-            <span className="text-blue-600">KE:</span> {kineticEnergy.toFixed(1)} J
-          </div>
-          <div className="text-xs">
-            <span className="text-orange-400">E_thermal:</span> {thermalEnergy.toFixed(1)} J
+
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/90 px-4 py-3 text-sm text-slate-300 shadow-sm">
+            <div className="text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">
+              Thermal output
+            </div>
+            <div className="mt-2 font-mono text-xl text-orange-300">{thermalEnergy.toFixed(1)} J</div>
           </div>
         </div>
 
-        <div className="absolute top-4 right-4 bg-white border border-black px-3 py-2">
-          <div className="flex items-center gap-2 mb-1">
-            <Timer className="w-4 h-4 text-blue-600" />
-            <span className="text-xs">Stopwatch</span>
+        <div className="absolute right-5 top-5 rounded-3xl border border-slate-800 bg-slate-900/90 px-4 py-4 text-slate-300 shadow-sm">
+          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-slate-500">
+            <Timer className="h-4 w-4 text-cyan-300" />
+            <span>Stopwatch</span>
           </div>
-          <div className="text-lg">
-            {elapsedTime.toFixed(2)}s
-          </div>
-          <div className="text-xs mt-1">
-            Power: {elapsedTime > 0 ? (100 / elapsedTime).toFixed(2) : '0.00'} W
-          </div>
-        </div>
-      </div>
-
-      <div className="space-y-3 mb-4">
-        <div className="space-y-1">
-          <div className="flex justify-between text-xs">
-            <span>Spring Energy</span>
-            <span>{springEnergy.toFixed(0)}%</span>
-          </div>
-          <div className="h-2 bg-gray-300 border border-black overflow-hidden">
-            <motion.div
-              className="h-full bg-blue-600"
-              style={{ width: `${springEnergy}%` }}
-              animate={{ width: `${springEnergy}%` }}
-            />
-          </div>
-        </div>
-
-        <div className="space-y-1">
-          <div className="flex justify-between text-xs">
-            <span>Kinetic Energy</span>
-            <span>{kineticEnergy.toFixed(0)}%</span>
-          </div>
-          <div className="h-2 bg-gray-300 border border-black overflow-hidden">
-            <motion.div
-              className="h-full bg-blue-600"
-              style={{ width: `${kineticEnergy}%` }}
-              animate={{ width: `${kineticEnergy}%` }}
-            />
-          </div>
-        </div>
-
-        <div className="space-y-1">
-          <div className="flex justify-between text-xs">
-            <span>Thermal Energy</span>
-            <span>{thermalEnergy.toFixed(0)}%</span>
-          </div>
-          <div className="h-2 bg-gray-300 border border-black overflow-hidden">
-            <motion.div
-              className="h-full bg-orange-500"
-              style={{ width: `${thermalEnergy}%` }}
-              animate={{ width: `${thermalEnergy}%` }}
-            />
+          <div className="mt-3 font-mono text-3xl text-slate-100">{elapsedTime.toFixed(2)}s</div>
+          <div className="mt-2 text-sm text-slate-400">
+            Power output <span className="font-semibold text-cyan-300">{elapsedTime > 0 ? `${(100 / elapsedTime).toFixed(2)} W` : '0.00 W'}</span>
           </div>
         </div>
       </div>
 
-      <div className="flex gap-2">
+      <div className="grid gap-4 sm:grid-cols-3">
+        <div className="rounded-3xl border border-slate-800 bg-slate-900/95 p-4 text-slate-300 shadow-sm transition-all duration-200 hover:scale-[1.01]">
+          <div className="text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">Spring</div>
+          <div className="mt-3 font-mono text-2xl text-cyan-300">{springEnergy.toFixed(0)}%</div>
+        </div>
+        <div className="rounded-3xl border border-slate-800 bg-slate-900/95 p-4 text-slate-300 shadow-sm transition-all duration-200 hover:scale-[1.01]">
+          <div className="text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">Kinetic</div>
+          <div className="mt-3 font-mono text-2xl text-cyan-300">{kineticEnergy.toFixed(0)}%</div>
+        </div>
+        <div className="rounded-3xl border border-slate-800 bg-slate-900/95 p-4 text-slate-300 shadow-sm transition-all duration-200 hover:scale-[1.01]">
+          <div className="text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">Thermal</div>
+          <div className="mt-3 font-mono text-2xl text-orange-300">{thermalEnergy.toFixed(0)}%</div>
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-3">
         <button
           onClick={windUp}
           disabled={isWound || isMoving}
-          className="px-4 py-2 bg-blue-600 text-white border border-black hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="rounded-3xl border border-cyan-600 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200 transition-all duration-200 hover:scale-[1.01] hover:bg-cyan-500/20 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Wind Up
         </button>
         <button
           onClick={release}
           disabled={!isWound || isMoving}
-          className="px-4 py-2 bg-blue-600 text-white border border-black hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="rounded-3xl border border-cyan-600 bg-cyan-500/10 px-4 py-3 text-sm font-semibold text-cyan-200 transition-all duration-200 hover:scale-[1.01] hover:bg-cyan-500/20 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Release
         </button>
         <button
           onClick={reset}
           disabled={isMoving}
-          className="px-4 py-2 bg-white hover:bg-gray-100 border border-black disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="rounded-3xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-200 transition-all duration-200 hover:scale-[1.01] hover:border-slate-600 hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Reset
         </button>
