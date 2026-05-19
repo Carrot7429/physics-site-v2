@@ -400,13 +400,6 @@ export function SpringCalculator() {
                 Scale: {getCurrentDisplacement().toFixed(2)}m (scaled to fit)
               </div>
             )}
-            <div className="text-sm text-center bg-white px-4 py-2 border border-black">
-              {mode === 'elastic' ? (
-                <span>E = {calculateElastic().toFixed(2)} J</span>
-              ) : (
-                <span>K = {calculateConstant().toFixed(2)} N/m</span>
-              )}
-            </div>
           </div>
         </div>
       </div>
