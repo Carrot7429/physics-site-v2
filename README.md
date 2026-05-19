@@ -21,22 +21,3 @@ Live Site: [https://carrot7429.github.io/physics-site-v2/](https://carrot7429.gi
 * **How it works:** Clicking "Wind Up" loads the energy up to 100%. Clicking "Release" plays the animation. To make it more realistic, the duration of the run randomly varies slightly (+ or - 0.5 seconds) every time you click it. A built-in stopwatch calculates the live time and total wattage/power output.
 
 ---
-
-## 🛠️ The Tools Used
-
-* **React & TypeScript:** The structural layout.
-* **Vite:** The setup that compiles and runs the local project code.
-* **Tailwind CSS:** Used for simple styling, borders, and margins.
-* **Framer Motion:** Used to handle the spring animations and moving blocks.
-* **Radix UI:** Behind-the-scenes helpers to make the sliders and toggles work smoothly.
-
----
-
-## 💻 Running it on Your Computer
-
-If you want to download and check out the code locally:
-
-1. Clone or download the repository:
-   ```bash
-   git clone [https://github.com/Carrot7429/physics-site-v2.git](https://github.com/Carrot7429/physics-site-v2.git)
-   cd physics-site-v2
