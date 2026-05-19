@@ -118,7 +118,7 @@ export function GPECalculator() {
               <Slider.Root
                 value={[Math.min(gpe, 100)]}
                 onValueChange={(values) => setGpe(values[0])}
-                max={4000}
+                max={100}
                 min={0}
                 step={5}
                 className="relative flex items-center w-full h-5 mt-2"
