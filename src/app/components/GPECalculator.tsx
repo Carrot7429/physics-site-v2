@@ -82,7 +82,7 @@ export function GPECalculator() {
               <Slider.Root
                 value={[mass]}
                 onValueChange={(values) => setMass(values[0])}
-                max={50}
+                max={20}
                 step={0.5}
                 className="relative flex items-center w-full h-5 mt-2"
               >
