@@ -3,7 +3,7 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
-
+// Custom function required by your Figma export to handle asset paths
 function figmaAssetResolver() {
   return {
     name: 'figma-asset-resolver',
@@ -16,13 +16,8 @@ function figmaAssetResolver() {
   }
 }
 
-import { defineConfig } from 'vite'
-import react from '@vitejs/react-refresh' // Or whatever react import your file currently uses at the very top
-import tailwindcss from '@tailwindcss/vite' 
-import path from 'path'
-
 export default defineConfig({
-  base: '/physics-site-v2/', // 👈 Added this line so your sub-pages and assets map correctly to GitHub Pages
+  base: '/physics-site-v2/', 
   plugins: [
     figmaAssetResolver(),
     react(),
