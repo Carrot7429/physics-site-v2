@@ -43,7 +43,6 @@ export function WindupToy() {
     setIsTimerRunning(true);
     const totalEnergy = springEnergy;
     
-    // 🟢 Generates a random number between 2.5 and 3.5 seconds every release
     const animationDuration = 3 + (Math.random() - 0.5);
 
     await animate(
