@@ -156,11 +156,11 @@ export function GPECalculator() {
             <span className="font-mono text-cyan-300">{getCurrentHeight().toFixed(1)} m</span>
           </div>
 
-          <div className="relative h-64 overflow-hidden rounded-[1.5rem] border border-slate-800 bg-slate-950/80">
-            <div className="absolute left-5 top-5 text-xs uppercase tracking-[0.3em] text-slate-500">Ground</div>
-            <div className="absolute inset-x-5 bottom-5 h-2 rounded-full bg-slate-800" />
-            <div className="absolute inset-x-5 top-6 bottom-16 rounded-[1.5rem] bg-slate-900/80" />
-            <div className="absolute left-6 top-6 flex h-full w-1 flex-col justify-between text-[0.65rem] text-slate-500">
+          <div className="relative min-h-[30rem] overflow-hidden rounded-[1.5rem] border border-slate-800 bg-slate-950/80">
+            <div className="absolute left-5 top-6 text-xs uppercase tracking-[0.3em] text-slate-500">Ground</div>
+            <div className="absolute inset-x-5 bottom-6 h-2 rounded-full bg-slate-800" />
+            <div className="absolute inset-x-5 top-8 bottom-20 rounded-[1.5rem] bg-slate-900/80" />
+            <div className="absolute left-6 top-8 bottom-20 flex w-1 flex-col justify-between text-[0.65rem] text-slate-500">
               {[20, 15, 10, 5, 0].map((value) => (
                 <span key={value} className="relative -left-8">
                   {value}m

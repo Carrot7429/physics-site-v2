@@ -110,7 +110,7 @@ export function WindupToy() {
       </p>
       </header>
 
-      <div ref={scope} className="relative overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950/95 p-5 shadow-[inset_0_0_40px_rgba(15,23,42,0.45)]">
+      <div ref={scope} className="relative min-h-[34rem] overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950/95 p-6 shadow-[inset_0_0_40px_rgba(15,23,42,0.45)]">
         <div className="absolute inset-x-5 bottom-6 h-0.5 bg-slate-800" />
 
         <motion.div
