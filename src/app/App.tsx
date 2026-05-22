@@ -51,7 +51,7 @@ export default function App() {
           </div>
           <div className="space-y-8">
             <WorkPowerCalculator />
-            <div className="grid gap-6 xl:grid-cols-2">
+            <div className="grid gap-6">
               <GPECalculator />
               <KineticCalculator />
             </div>
