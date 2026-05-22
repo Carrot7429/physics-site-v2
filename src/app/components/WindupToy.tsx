@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useAnimate } from 'motion/react';
 import { RotateCw, Timer } from 'lucide-react';
 
 export function WindupToy() {
   const [scope, animate] = useAnimate();
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [isWound, setIsWound] = useState(false);
   const [isMoving, setIsMoving] = useState(false);
   const [springEnergy, setSpringEnergy] = useState(0);
@@ -46,17 +47,18 @@ export function WindupToy() {
     setElapsedTime(0);
     setIsTimerRunning(true);
     const totalEnergy = springEnergy;
-    
+    const wrapperWidth = wrapperRef.current?.clientWidth ?? 0;
+    const travelDistance = Math.max(220, wrapperWidth - 144);
     const animationDuration = 3 + (Math.random() - 0.5);
 
     await animate(
       '#toy',
-      { x: [0, 300] },
+      { x: [0, travelDistance] },
       {
         duration: animationDuration,
         ease: 'easeOut',
         onUpdate: (latest) => {
-          const progress = (latest as number) / 300;
+          const progress = (latest as number) / travelDistance;
           const currentKE = totalEnergy * (1 - progress) * 0.8;
           const currentSpring = totalEnergy * (1 - progress) * 0.2;
           const currentThermal = totalEnergy * progress;
@@ -110,7 +112,10 @@ export function WindupToy() {
       </p>
       </header>
 
-      <div ref={scope} className="relative min-h-[34rem] overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950/95 p-6 shadow-[inset_0_0_40px_rgba(15,23,42,0.45)]">
+      <div ref={(node) => {
+          scope(node);
+          wrapperRef.current = node;
+        }} className="relative min-h-[28rem] overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950/95 p-6 shadow-[inset_0_0_40px_rgba(15,23,42,0.45)]">
         <div className="absolute inset-x-5 bottom-6 h-0.5 bg-slate-800" />
 
         <motion.div
